@@ -1,0 +1,6 @@
+-Verificar instalação do styled components                       - npm i --save styled-components
+
+-Verificar a instalção do pacotes de "tipos" do styled para o TS - npm install --save-dev @types/styled-components
+
+-Verificar a instalação do redux e do seu "toolkit"              - npm i --save react-redux @reduxjs/toolkit
+
