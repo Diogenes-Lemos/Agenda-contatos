@@ -27,14 +27,15 @@ export const AppArea = styled.div`
     width: 100vw;
     height: 100vh;
     position: relative;
+
 `;
 
 export const WorkArea = styled.div`
     display: grid;
-    grid-template-columns: 15% 85%;
+    grid-template-columns: 5% 95%;
     width: 100%;
     max-width: 900px;
-    height: auto;
+    align-items: center;
     margin: 0 auto;
 `
 
