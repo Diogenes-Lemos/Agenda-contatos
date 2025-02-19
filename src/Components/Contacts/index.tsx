@@ -15,6 +15,9 @@ const Contact = ({ selectedContacts, setSelectedContacts, }: ContactProps) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const contacts = useSelector((state: RootState) => state.contacts.contacts);
+    const selectedSidebar = useSelector((state: RootState) => state.sidebar.selecionado);
+
+
 
     const handleChkBox = (id: number) => {
         setSelectedContacts((prevSelected) =>
@@ -31,8 +34,11 @@ const Contact = ({ selectedContacts, setSelectedContacts, }: ContactProps) => {
 
     return (
         <>
-            {contacts.map((contact) => (
-                <Cdata key={contact.id}> 
+            {contacts.map((contact) => {
+                const isVisible = contact.assid === selectedSidebar; 
+                
+                return (
+                    <Cdata key={contact.id} style={{ display: isVisible || selectedSidebar === 0 ? "flex" : "none" }}> 
                     <input type="checkbox" onChange={() => handleChkBox(contact.id)} checked={selectedContacts.includes(contact.id)} />
                     <div>
                         <p><strong>Nome Completo:</strong> {contact.nomeCompleto}</p>
@@ -41,7 +47,8 @@ const Contact = ({ selectedContacts, setSelectedContacts, }: ContactProps) => {
                     </div>
                     <Btnedit onClick={() => handleEdit(contact.id)} />
                 </Cdata>
-            ))}
+                )
+            })}
         </>
     );
 };

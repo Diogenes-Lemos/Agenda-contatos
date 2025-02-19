@@ -7,6 +7,7 @@ import Contact from '../Contacts'
 import Btntop from '../buttons/btntop'
 import { deleteContacts } from '../../Reducers/contactSlice'
 import { RootState } from '../../redux/store/store'
+import { setSelecionado } from '../../Reducers/sidebarSlice'
 
 interface ClistProps {
     filterLetter: string | null;
@@ -34,7 +35,7 @@ const Clist = () => {
         <S.Carea>
             <S.Btnbar>
                 <Btntop text="Novo" onClick={() => navigate("/novo")} />
-                <Btntop text="Exibir todos" bgColor="#ffda79" />
+                <Btntop text="Exibir todos" bgColor="#ffda79"  onClick={() => dispatch(setSelecionado(0))}/>
                 <Btntop text="Excluir" bgColor='#e84118' onClick={ handleDelete } />
             </S.Btnbar>
             <S.Clist>

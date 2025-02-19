@@ -3,6 +3,7 @@ import Contact from "../Components/Contacts";
 
 type Contact = {
   id: number;
+  assid: number;
   nomeCompleto: string;
   email: string;
   telefone: string | number;
@@ -11,23 +12,26 @@ type Contact = {
 type ContactState = {
   contacts: Contact[];
   selectedContact: Contact | null;
+  assId: number;
 };
 
 const initialState: ContactState = {
   contacts: [
-    { id: 1, nomeCompleto: "Ailton dos Coco Junior", email: "adoscoco@hotmail.com", telefone: 1122334455 },
-    { id: 2, nomeCompleto: "Zé das Flor e Silva", email: "zdasflor@gmail.com", telefone: 1955334499 }
+    { id: 1, assid: 1, nomeCompleto: "Ailton dos Coco Junior", email: "adoscoco@hotmail.com", telefone: 1122334455 },
+    { id: 2, assid: 26, nomeCompleto: "Zé das Flor e Silva", email: "zdasflor@gmail.com", telefone: 1955334499 }
   ],
   selectedContact: null,
+  assId: 0,
 };
 
 const contactSlice = createSlice({
   name: "contacts",
   initialState,
   reducers: {
-    addContact: (state, action: PayloadAction<Omit<Contact, "id">>) => {
+    addContact: (state, action: PayloadAction<Omit<Contact, "id" | "assid">>) => {
       const newId = state.contacts.length ? state.contacts[state.contacts.length - 1].id + 1 : 1;
-      state.contacts.push({ id: newId, ...action.payload });
+      const newassId = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(action.payload.nomeCompleto.charAt(0).toUpperCase()) + 1;
+      state.contacts.push({ id: newId, assid: newassId, ...action.payload });
     },
     selectContact: (state, action: PayloadAction<number>) => {
       const foundContact = state.contacts.find((c) => c.id === action.payload);
@@ -44,7 +48,10 @@ const contactSlice = createSlice({
     },
     deleteContacts: (state, action: PayloadAction<number[]>) => {
       state.contacts = state.contacts.filter(contact => !action.payload.includes(contact.id));
-    }
+    },
+    setAssId: (state, action: PayloadAction<number>) => {
+      state.assId = action.payload;
+    },
   },
 });
 

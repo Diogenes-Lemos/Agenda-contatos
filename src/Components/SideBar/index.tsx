@@ -1,8 +1,16 @@
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store/store";
+import { setSelecionado } from "../../Reducers/sidebarSlice";
 import * as S from './style'
-import { useState } from 'react'
 
-const SideBar = () => {
-    const [selecionado, setSelecionado] = useState<number | null>(null);
+type sBarProps = {
+    sItem: number;
+    setsItem: (value: number) => void;
+}
+
+const SideBar = ({ sItem, setsItem, }: sBarProps) => {
+    const dispatch = useDispatch();
+    const selecionado = useSelector((state: RootState) => state.sidebar.selecionado);
 
     const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""); 
 
@@ -12,8 +20,11 @@ const SideBar = () => {
                 <S.Link 
                     key={index} 
                     id={`link-${index}`} 
-                    onClick={() => setSelecionado(index)} 
-                    selecionado={selecionado === index}
+                    onClick={() => {
+                        dispatch(setSelecionado(index + 1));
+                        setsItem(index + 1);
+                    }}
+                    selecionado={selecionado === index + 1} 
                 >
                     <p>{letra}</p>
                 </S.Link>

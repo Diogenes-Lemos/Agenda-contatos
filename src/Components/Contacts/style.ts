@@ -4,7 +4,7 @@ export const Cdata = styled.li `
     margin: 0 auto;
     margin-top: 0.5vh;
     border: 1px solid;
-    display: flex;
+
     flex-wrap: wrap;
     justify-content: space-between;
     width: 80%;

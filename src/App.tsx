@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useState } from "react";
 
 import EstiloGlobal, { Wallpaper, AppArea, WorkArea } from "./Styles";
 import SideBar from "./Components/SideBar";
@@ -21,6 +22,7 @@ const route = createBrowserRouter([{
 ])
 
   function App() {
+    const [sItem, setsItem] = useState<number>(0); 
   
     return (
       <>
@@ -29,7 +31,7 @@ const route = createBrowserRouter([{
         <AppArea>
           <WorkArea>
             <aside>
-            <SideBar/>
+              <SideBar sItem={sItem} setsItem={setsItem} />
             </aside>
             <main>
               <RouterProvider router={route} />
